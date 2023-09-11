@@ -2,6 +2,22 @@
 #include <ctime>
 #include <iostream>
 
+std::string clearMessage(std::string message){
+    for (int i = 0; i < message.length(); i++){
+        // Change lowcase to uppercase
+        if ((message[i] >= 97) && (message[i] <= 122)){
+            message[i] = message[i] - 32;
+            continue;
+        }
+        // Remove other symbols
+        if ((message[i] >= 91) || (message[i] <= 64)){
+            message.erase(i);
+        }
+    }
+
+    return message;
+}
+
 JeffersonDisk::JeffersonDisk(int diskCount, int shiftCount){
     size = diskCount;
     shift = shiftCount;
@@ -41,6 +57,7 @@ JeffersonDisk::~JeffersonDisk(){
 }
 
 std::string JeffersonDisk::encodeMessage(std::string message) {
+    std::string input = clearMessage(message);
 }
 
 void JeffersonDisk::changeShift(int newShift) {
