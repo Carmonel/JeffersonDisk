@@ -2,9 +2,7 @@
 #include "JeffersonDisk.h"
 #include "string"
 
-
 int main() {
-    std::string message = "Hello, world!";
-    std::string
-    JeffersonDisk disk(6, 4);
+    auto* disk = new JeffersonDisk(6, 4);
+    disk->printDisks();
 }

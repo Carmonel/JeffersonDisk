@@ -1,7 +1,7 @@
 #ifndef JEFFERSONDISK_JEFFERSONDISK_H
 #define JEFFERSONDISK_JEFFERSONDISK_H
 
-#include "string"
+#include <string>
 
 class JeffersonDisk {
 private:
@@ -10,12 +10,13 @@ private:
     // Shift count
     int shift;
     // Disks array
-    int** diskArray;
+    unsigned char** diskArray;
 public:
     JeffersonDisk(int diskCount, int shiftCount); // Creating obj + first filling letters
     void newRandomDisks(); // Fill diskArray new compilation of letters
     void changeShift(int newShift); // Replace shift number
-    std::string encodeMessage(std::string message); // Encode message and return encoded string
+    void encodeFile(const std::string& inputPath, const std::string& outputPath); // Encode message and return encoded string
+    void printDisks();
     ~JeffersonDisk(); // Clearing data
 };
 
