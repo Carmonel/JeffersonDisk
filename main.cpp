@@ -1,6 +1,10 @@
 #include <iostream>
+#include "JeffersonDisk.h"
+#include "string"
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    std::string message = "Hello, world!";
+    std::string
+    JeffersonDisk disk(6, 4);
 }

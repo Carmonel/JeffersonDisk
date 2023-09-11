@@ -123,6 +123,33 @@ JeffersonDisk/fast:
 	$(MAKE) -f CMakeFiles/JeffersonDisk.dir/build.make CMakeFiles/JeffersonDisk.dir/build
 .PHONY : JeffersonDisk/fast
 
+JeffersonDisk.o: JeffersonDisk.cpp.o
+
+.PHONY : JeffersonDisk.o
+
+# target to build an object file
+JeffersonDisk.cpp.o:
+	$(MAKE) -f CMakeFiles/JeffersonDisk.dir/build.make CMakeFiles/JeffersonDisk.dir/JeffersonDisk.cpp.o
+.PHONY : JeffersonDisk.cpp.o
+
+JeffersonDisk.i: JeffersonDisk.cpp.i
+
+.PHONY : JeffersonDisk.i
+
+# target to preprocess a source file
+JeffersonDisk.cpp.i:
+	$(MAKE) -f CMakeFiles/JeffersonDisk.dir/build.make CMakeFiles/JeffersonDisk.dir/JeffersonDisk.cpp.i
+.PHONY : JeffersonDisk.cpp.i
+
+JeffersonDisk.s: JeffersonDisk.cpp.s
+
+.PHONY : JeffersonDisk.s
+
+# target to generate assembly for a file
+JeffersonDisk.cpp.s:
+	$(MAKE) -f CMakeFiles/JeffersonDisk.dir/build.make CMakeFiles/JeffersonDisk.dir/JeffersonDisk.cpp.s
+.PHONY : JeffersonDisk.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... JeffersonDisk"
+	@echo "... JeffersonDisk.o"
+	@echo "... JeffersonDisk.i"
+	@echo "... JeffersonDisk.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

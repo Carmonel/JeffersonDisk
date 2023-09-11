@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/cygdrive/c/Users/Ярослав/CLionProjects/JeffersonDisk/JeffersonDisk.cpp">
+			<Option target="JeffersonDisk"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/Ярослав/CLionProjects/JeffersonDisk/JeffersonDisk.h">
+			<Option target="JeffersonDisk"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/Ярослав/CLionProjects/JeffersonDisk/main.cpp">
 			<Option target="JeffersonDisk"/>
 		</Unit>

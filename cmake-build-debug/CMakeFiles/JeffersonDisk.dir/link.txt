@@ -1,1 +1,1 @@
-/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/JeffersonDisk.dir/main.cpp.o  -o JeffersonDisk.exe -Wl,--out-implib,libJeffersonDisk.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/JeffersonDisk.dir/main.cpp.o CMakeFiles/JeffersonDisk.dir/JeffersonDisk.cpp.o  -o JeffersonDisk.exe -Wl,--out-implib,libJeffersonDisk.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

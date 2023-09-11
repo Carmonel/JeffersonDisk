@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/JeffersonDisk.dir/JeffersonDisk.cpp.o"
   "CMakeFiles/JeffersonDisk.dir/main.cpp.o"
   "JeffersonDisk.exe"
   "JeffersonDisk.pdb"
