@@ -3,6 +3,7 @@
 #include "string"
 
 int main() {
-    auto* disk = new JeffersonDisk(6, 4);
+    auto* disk = new JeffersonDisk(2, 1);
     disk->printDisks();
+    disk->encodeFile("C:\\Users\\Ярослав\\Documents\\in", "C:\\Users\\Ярослав\\Documents\\out");
 }

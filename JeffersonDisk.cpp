@@ -3,22 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-std::string clearMessage(std::string message){
-    for (int i = 0; i < message.length(); i++){
-        // Change lowcase to uppercase
-        if ((message[i] >= 97) && (message[i] <= 122)){
-            message[i] = message[i] - 32;
-            continue;
-        }
-        // Remove other symbols
-        if ((message[i] >= 91) || (message[i] <= 64)){
-            message.erase(i);
-        }
-    }
-
-    return message;
-}
-
 JeffersonDisk::JeffersonDisk(int diskCount, int shiftCount){
     this->size = diskCount;
     this->shift = shiftCount;
@@ -77,7 +61,7 @@ void JeffersonDisk::printDisks() {
             if (diskArray[i][j] < 0x10){
                 std::cout << "0";
             }
-            std::cout << std::uppercase << std::hex << diskArray[i][j] << " ";
+            std::cout << std::uppercase << std::hex << (int)diskArray[i][j] << " ";
         }
         std::cout << std::endl;
     }
@@ -100,26 +84,48 @@ void JeffersonDisk::encodeFile(const std::string& inputPath, const std::string& 
         std::cout << "Output file error: " << e.what() << std::endl;
     }
 
-    if ((!inputFile.is_open()) || (!outputFile.is_open())){
+    if (!inputFile.is_open()){
         std::cout << "Input or output file have not been opened." << std::endl;
+        exit(-1);
+    }
+    if (!outputFile.is_open()){
+        std::cout << "Output file have not been opened." << std::endl;
+        exit(-1);
+    }
+    
+    ///
+    /// Writing keys to file
+    ///
+    std::cout << "Writing keys to file..." << std::endl;
+    outputFile.write(reinterpret_cast<const char *>(&shift), 1);
+    outputFile.write(reinterpret_cast<const char *>(&size), 1);
+    for (int i = 0; i < size; i++){
+        for (int j = 0; j < 256; j++){
+            outputFile.write(reinterpret_cast<const char *>(&diskArray[i][j]), 1);
+        }
     }
 
-    char* ch;
-    unsigned char negativeCh;
-    int diskQueue = 0;
+
+    ///
+    /// Writing data to file
+    ///
+    std::cout << "Writing data to file..." << std::endl;
     // Reading next binary hex
-    while (inputFile.read(ch, 1)){
-        negativeCh = (unsigned char)*ch; // binary hex -> char
+    int diskNumber = 0;
+    char readHex;
+    while (inputFile.read((char*)(&readHex), 1)){
+        // Disk number loop: 0 --> size-1
+        if (diskNumber == size) diskNumber = 0;
+        std::cout << std::hex << std::uppercase << "Read " << (int)readHex << "['" << readHex <<"']" << " --> ";
 
         // Finding this hex in current disk
-        int chPos = 0;
-        while (diskArray[diskQueue % size][chPos] != negativeCh){
-            chPos++;
-        }
+        int readHexPosition = 0;
+        while (diskArray[diskNumber][readHexPosition] != readHex) readHexPosition++;
 
-        // Creating new hex
-        char* writeCh = (char*)&diskArray[diskQueue % size][chPos + shift];
-        outputFile.write(writeCh, 1); // Writing shifted hex by current disk
+        // Writing shifted hex by current disk
+        std::cout << std::hex << std::uppercase << (int)diskArray[diskNumber][readHexPosition + shift] << std::endl;
+        outputFile.write(reinterpret_cast<const char *>(&diskArray[diskNumber][readHexPosition + shift]), 1);
+        diskNumber++;
     }
 
     inputFile.close();
