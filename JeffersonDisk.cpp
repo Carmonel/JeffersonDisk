@@ -2,9 +2,14 @@
 #include <ctime>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 JeffersonDisk::JeffersonDisk(int diskCount, int shiftCount){
     this->size = diskCount;
+    if ((shiftCount % 256 == 0) || (shiftCount <= 0)){
+        std::cout << "The shift cannot be a multiple of 256, be less than 0, or be 0." << std::endl;
+        exit(-1);
+    }
     this->shift = shiftCount;
 
     diskArray = new unsigned char*[diskCount];
@@ -191,12 +196,11 @@ void JeffersonDisk::decodeFile(const std::string &inputPath, const std::string &
 
         // Finding this hex in current disk
         int readHexPosition = 0;
-        while (diskArray[diskNumber][readHexPosition] != readHex) readHexPosition++;
+        while (diskArray[diskNumber][readHexPosition] != (unsigned char)readHex) readHexPosition++;
 
         // Writing shifted hex by current disk
         int writeHexPosition = readHexPosition - shift;
         if (writeHexPosition < 0) writeHexPosition = writeHexPosition + 256;
-        std::cout << std::hex << std::uppercase << (int)diskArray[diskNumber % size][writeHexPosition % 256] << std::endl;
         outputFile.write(reinterpret_cast<const char *>(&diskArray[diskNumber % size][writeHexPosition % 256]), 1);
         diskNumber++;
     }
